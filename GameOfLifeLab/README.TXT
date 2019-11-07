@@ -1,5 +1,13 @@
 Game of Life Lab
 
+* My Requirements:
+* The grid will be a 33x33 block grid
+* Live cells will be villagers
+* Dead cells will be zombies
+What pattern is displayed? Extensions: Are multiple patterns available? Are patterns chosen in code, chosen randomly, chosen by user, loaded from a file?
+How long does the game run? Does it run forever? Does it prompt the user to continue?
+What is the time interval between generations? Extension: Is the interval configurable by the user? In real-time?
+
 # Introduction
 # 
 The goal of this lab is to apply your understanding of decision and

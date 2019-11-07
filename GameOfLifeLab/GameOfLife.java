@@ -67,6 +67,8 @@ public class GameOfLife
         Location loc3 = new Location(Y3, X3);
         grid.put(loc3, rock3);
         
+        world.add(new Location(1, 1), new Villager());
+        
         // display the newly constructed and populated world
         world.show();
     }
