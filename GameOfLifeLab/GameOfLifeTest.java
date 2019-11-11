@@ -46,33 +46,35 @@ public class GameOfLifeTest
         /* expected pattern for initial state
          *  (X: alive; -: dead)
          * 
-         *    0 1 2 3 4
-         *  0 - - X - -
-         *  1 - - - X -
-         *  2 X X - - -
-         *  3 - - - - -
-         *  4 - - X - -
+         *    0 1 2 3 4 5
+         *  0 - - X - - -
+         *  1 - - - X - -
+         *  2 X X - - - -
+         *  3 - - - - - -
+         *  4 - - X - - -
+         *  5 - - - - - -
          *  
-         *    0 1 2 3 4
-         *  0 - - X X -
-         *  1 - X X - -
-         *  2 - - - - -
-         *  3 - X - - -
-         *  4 - - - - -
+         *    0 1 2 3 4 5
+         *  0 - - - - - -
+         *  1 - X X - - -
+         *  2 - - - - - -
+         *  3 - X - - - -
+         *  4 - - - - - -
+         *  5 - - - - - -
          *  
-         *    0 1 2 3 4
-         *  0 - X X X -
-         *  1 - X X X -
-         *  2 - X X - -
-         *  3 - - - - -
-         *  4 - - X - -
+         *    0 1 2 3 4 5
+         *  0 - - - - - -
+         *  1 - - - - - -
+         *  2 - X X - - -
+         *  3 - - - - - -
+         *  4 - - - - - -
+         *  5 - - - - - -
          */
+        final int ROWS = 6;
+        final int COLS = 6;
 
-        GameOfLife game = new GameOfLife();
+        GameOfLife game = new GameOfLife(ROWS, COLS);
         game.populateGame();
-        final int ROWS = game.getNumRows();
-        final int COLS = game.getNumCols();
-
         for(int row = 0; row < ROWS; row++)
         {
             for(int col = 0; col < COLS; col++)
@@ -101,19 +103,21 @@ public class GameOfLifeTest
     public void testFinalState()
     {
         /* verify that the actual pattern matches the expected pattern after 3 generations
-        0 1 2 3 4
-         *  0 - X X X -
-         *  1 - X X X -
-         *  2 - X X - -
-         *  3 - - - - -
-         *  4 - - X - -*  
+        0 1 2 3 4 5
+         *  0 - - - - - -
+         *  1 - - - - - -
+         *  2 - X X - - -
+         *  3 - - - - - -
+         *  4 - - - - - - 
+         *  5 - - - - - -
          */
 
         // ...
-        GameOfLife game = new GameOfLife();
+        final int ROWS = 6;
+        final int COLS = 6;
+
+        GameOfLife game = new GameOfLife(ROWS, COLS);
         game.populateGame();
-        final int ROWS = game.getNumRows();
-        final int COLS = game.getNumCols();
 
         game.createNextGeneration();
         game.createNextGeneration();
@@ -126,15 +130,8 @@ public class GameOfLifeTest
                 Actor cell = game.getActor(row, col);
 
                 // if the cell at the current row and col should be alive, assert that the actor is not null
-                if(     (row == 0 && col == 1) ||
-                (row == 0 && col == 2) ||
-                (row == 0 && col == 3) ||
-                (row == 1 && col == 1) ||
-                (row == 1 && col == 2) ||
-                (row == 1 && col == 3) ||
-                (row == 2 && col == 1) ||
-                (row == 2 && col == 2) ||
-                (row == 4 && col == 2))
+                if(     (row == 2 && col == 1) ||
+                (row == 2 && col == 2)  )
                 {
                     assertNotNull("expected alive cell at (" + row + ", " + col + ")", cell);
                 }

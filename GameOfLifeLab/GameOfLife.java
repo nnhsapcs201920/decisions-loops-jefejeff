@@ -18,20 +18,18 @@ public class GameOfLife
     // the world comprised of the grid that displays the graphics for the game
     private ActorWorld world;
 
-    // the game board will have 33 rows and 33 columns
-    private final int ROWS = 5;
-    private final int COLS = 5;
-
+    //remove instance variables
     /**
      * Default constructor for objects of class GameOfLife
      * 
+     * @param initialRows the number of rows, initialCols the number of columns
      * @post    the game will be initialized and populated with the initial state of cells
      * 
      */
-    public GameOfLife()
+    public GameOfLife(int initialRows, int initialCols) //make constructor configurable
     {
         // create the grid, of the specified size, that contains Actors
-        BoundedGrid<Actor> grid = new BoundedGrid<Actor>(ROWS, COLS);
+        BoundedGrid<Actor> grid = new BoundedGrid<Actor>(initialRows, initialCols);
 
         // create a world based on the grid
         world = new ActorWorld(grid);
@@ -44,15 +42,16 @@ public class GameOfLife
      * @post    all actors that comprise the initial state of the game have been added to the grid
      * 
      */
-    public void populateGame()
+    public void populateGame()  //change visibility to public
     {
         /* 
-         *    0 1 2 3 4
-         *  0 - - X - -
-         *  1 - - - X -
-         *  2 X X - - -
-         *  3 - - - - -
-         *  4 - - X - -
+         *    0 1 2 3 4 5
+         *  0 - - X - - -
+         *  1 - - - X - -
+         *  2 X X - - - -
+         *  3 - - - - - -
+         *  4 - - X - - -
+         *  5 - - - - - -
          */
         // constants for the location of the three cells initially alive
         final int X1 = 2, Y1 = 0;
@@ -67,22 +66,27 @@ public class GameOfLife
 
         // create and add villagers (a type of Actor) to the three intial locations
         Villager villager1 = new Villager();
+        villager1.setColor();
         Location loc1 = new Location(Y1, X1);
         grid.put(loc1, villager1);
 
         Villager villager2 = new Villager();
+        villager2.setColor();
         Location loc2 = new Location(Y2, X2);
         grid.put(loc2, villager2);
 
         Villager villager3 = new Villager();
+        villager3.setColor();
         Location loc3 = new Location(Y3, X3);
         grid.put(loc3, villager3);
 
         Villager villager4 = new Villager();
+        villager4.setColor();
         Location loc4 = new Location(Y4, X4);
         grid.put(loc4, villager4);
 
         Villager villager5 = new Villager();
+        villager5.setColor();
         Location loc5 = new Location(Y5, X5);
         grid.put(loc5, villager5);
 
@@ -108,11 +112,11 @@ public class GameOfLife
         Grid<Actor> grid = world.getGrid();
 
         //updates next generation
-        for(int i=0; i<ROWS; i++)
+        for(int i=0; i<this.world.getGrid().getNumRows(); i++)
         {
-            for(int j=0; j<COLS; j++)
+            for(int j=0; j<this.world.getGrid().getNumCols(); j++)
             {
-               this.getActor(i, j);
+                Class check = this.getActor(i, j).getClass();
             }
         }
     }
@@ -131,16 +135,6 @@ public class GameOfLife
         Actor actor = world.getGrid().get(loc);
         return actor;
     }
-    
-    /**
-     * Returns number of neighbors which are Villagers (alive cells) at the specified row and column
-     */
-    public int getVillagers(int row, int col)
-    {
-        Location loc1 = new Location(row-1, col-1);
-        
-        return 3;
-    }
 
     /**
      * Returns the number of rows in the game board
@@ -149,7 +143,7 @@ public class GameOfLife
      */
     public int getNumRows()
     {
-        return ROWS;
+        return  this.world.getGrid().getNumRows();
     }
 
     /**
@@ -159,7 +153,7 @@ public class GameOfLife
      */
     public int getNumCols()
     {
-        return COLS;
+        return  this.world.getGrid().getNumCols();
     }
 
     /**
@@ -168,8 +162,7 @@ public class GameOfLife
      */
     public static void main(String[] args) throws InterruptedException
     {
-        GameOfLife game = new GameOfLife();
-
+        GameOfLife game = new GameOfLife(6, 6);  // hard-code 6x6 grid
         // populate the game
         game.populateGame();
 
