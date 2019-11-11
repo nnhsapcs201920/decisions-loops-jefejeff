@@ -4,20 +4,21 @@ import info.gridworld.actor.Rock;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
+import java.util.ArrayList;
 
 /**
  * Game of Life starter code. Demonstrates how to create and populate the game using the GridWorld framework.
  * Also demonstrates how to provide accessor methods to make the class testable by unit tests.
  * 
- * @author gcschmit
- * @version 18 July 2014
+ * @author jcheng3
+ * @version 11/9/2019
  */
 public class GameOfLife
 {
     // the world comprised of the grid that displays the graphics for the game
     private ActorWorld world;
 
-    // the game board will have 5 rows and 5 columns
+    // the game board will have 33 rows and 33 columns
     private final int ROWS = 5;
     private final int COLS = 5;
 
@@ -45,31 +46,46 @@ public class GameOfLife
      */
     public void populateGame()
     {
+        /* 
+         *    0 1 2 3 4
+         *  0 - - X - -
+         *  1 - - - X -
+         *  2 X X - - -
+         *  3 - - - - -
+         *  4 - - X - -
+         */
         // constants for the location of the three cells initially alive
         final int X1 = 2, Y1 = 0;
-        final int X2 = 0, Y2 = 2;
-        final int X3 = 1, Y3 = 2;
+        final int X2 = 3, Y2 = 1;
+        final int X3 = 0, Y3 = 2;
+        final int X4 = 1, Y4 = 2;
+        final int X5 = 2, Y5 = 4;
 
         // the grid of Actors that maintains the state of the game
         //  (alive cells contains actors; dead cells do not)
         Grid<Actor> grid = world.getGrid();
 
-        // create and add rocks (a type of Actor) to the three intial locations
-        Rock rock1 = new Rock();
+        // create and add villagers (a type of Actor) to the three intial locations
+        Villager villager1 = new Villager();
         Location loc1 = new Location(Y1, X1);
-        grid.put(loc1, rock1);
+        grid.put(loc1, villager1);
 
-        Rock rock2 = new Rock();
+        Villager villager2 = new Villager();
         Location loc2 = new Location(Y2, X2);
-        grid.put(loc2, rock2);
+        grid.put(loc2, villager2);
 
-        Rock rock3 = new Rock();
+        Villager villager3 = new Villager();
         Location loc3 = new Location(Y3, X3);
-        grid.put(loc3, rock3);
+        grid.put(loc3, villager3);
 
-        world.add(new Location(1, 1), new Villager());
+        Villager villager4 = new Villager();
+        Location loc4 = new Location(Y4, X4);
+        grid.put(loc4, villager4);
 
-        world.add(new Location(2, 2), new Zombie());
+        Villager villager5 = new Villager();
+        Location loc5 = new Location(Y5, X5);
+        grid.put(loc5, villager5);
+
         // display the newly constructed and populated world
         world.show();
     }
@@ -82,7 +98,7 @@ public class GameOfLife
      * @post    the world has been populated with a new grid containing the next generation
      * 
      */
-    private void createNextGeneration()
+    public void createNextGeneration()
     {
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
@@ -91,10 +107,14 @@ public class GameOfLife
         // create the grid, of the specified size, that contains Actors
         Grid<Actor> grid = world.getGrid();
 
-        /*
-         * !!! insert your Game of Life algorithm here...
-         */ 
-
+        //updates next generation
+        for(int i=0; i<ROWS; i++)
+        {
+            for(int j=0; j<COLS; j++)
+            {
+               this.getActor(i, j);
+            }
+        }
     }
 
     /**
@@ -110,6 +130,16 @@ public class GameOfLife
         Location loc = new Location(row, col);
         Actor actor = world.getGrid().get(loc);
         return actor;
+    }
+    
+    /**
+     * Returns number of neighbors which are Villagers (alive cells) at the specified row and column
+     */
+    public int getVillagers(int row, int col)
+    {
+        Location loc1 = new Location(row-1, col-1);
+        
+        return 3;
     }
 
     /**

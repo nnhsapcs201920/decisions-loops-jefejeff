@@ -4,9 +4,10 @@ Game of Life Lab
 * The grid will be a 33x33 block grid
 * Live cells will be villagers
 * Dead cells will be zombies
-What pattern is displayed? Extensions: Are multiple patterns available? Are patterns chosen in code, chosen randomly, chosen by user, loaded from a file?
-How long does the game run? Does it run forever? Does it prompt the user to continue?
-What is the time interval between generations? Extension: Is the interval configurable by the user? In real-time?
+* The pattern will be the Simkin Glider Gun, more information can be found here: https://www.conwaylife.com/wiki/Simkin_glider_gun
+* The game runs forever
+* Each tick will be 0.25 seconds
+* There are the no edge cases, when it hits the edge it will disappear instead of wrapping around
 
 # Introduction
 # 
