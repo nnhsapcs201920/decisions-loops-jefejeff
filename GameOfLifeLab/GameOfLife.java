@@ -116,7 +116,31 @@ public class GameOfLife
         {
             for(int j=0; j<this.world.getGrid().getNumCols(); j++)
             {
-                Class check = this.getActor(i, j).getClass();
+                Location loc1 = new Location(i - 1, j - 1);
+                Actor actor1 = world.getGrid().get(loc1);
+
+                Location loc2 = new Location(i, j - 1);
+                Actor actor2 = world.getGrid().get(loc2);
+
+                Location loc3 = new Location(i + 1, j - 1);
+                Actor actor3 = world.getGrid().get(loc3);
+
+                Location loc4 = new Location(i - 1, j);
+                Actor actor4 = world.getGrid().get(loc4);               
+
+                Location loc6 = new Location(i + 1, j);
+                Actor actor6 = world.getGrid().get(loc6);
+
+                Location loc7 = new Location(i - 1, j + 1);
+                Actor actor7 = world.getGrid().get(loc7);
+
+                Location loc8 = new Location(i, j + 1);
+                Actor actor8 = world.getGrid().get(loc8);
+
+                Location loc9 = new Location(i + 1, j + 1);
+                Actor actor9 = world.getGrid().get(loc9);
+                
+       
             }
         }
     }
