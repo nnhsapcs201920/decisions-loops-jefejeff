@@ -17,6 +17,8 @@ public class GameOfLife
 {
     // the world comprised of the grid that displays the graphics for the game
     private ActorWorld world;
+    public static Villager villager = new Villager();
+    public static Zombie zombie = new Zombie();
 
     //remove instance variables
     /**
@@ -36,13 +38,13 @@ public class GameOfLife
     }
 
     /**
-     * Creates the actors and inserts them into their initial starting positions in the grid
+     * Creates the actors and inserts them into their initial starting positions in the grid for the test class
      *
      * @pre     the grid has been created
      * @post    all actors that comprise the initial state of the game have been added to the grid
      * 
      */
-    public void populateGame()  //change visibility to public
+    public void populateGameTestMethod()  //change visibility to public
     {
         /* 
          *    0 1 2 3 4 5
@@ -53,7 +55,7 @@ public class GameOfLife
          *  4 - - X - - -
          *  5 - - - - - -
          */
-        // constants for the location of the three cells initially alive
+        // constants for the location of the cells initially alive
         final int X1 = 2, Y1 = 0;
         final int X2 = 3, Y2 = 1;
         final int X3 = 0, Y3 = 2;
@@ -64,37 +66,115 @@ public class GameOfLife
         //  (alive cells contains actors; dead cells do not)
         Grid<Actor> grid = world.getGrid();
 
-        // create and add villagers (a type of Actor) to the three intial locations
-        Villager villager1 = new Villager();
-        villager1.setColor();
+        // create and add villagers (my live cells) to the intial locations
+        villager.setColor();
+
         Location loc1 = new Location(Y1, X1);
-        grid.put(loc1, villager1);
+        grid.put(loc1, villager);
 
-        Villager villager2 = new Villager();
-        villager2.setColor();
         Location loc2 = new Location(Y2, X2);
-        grid.put(loc2, villager2);
+        grid.put(loc2, villager);
 
-        Villager villager3 = new Villager();
-        villager3.setColor();
         Location loc3 = new Location(Y3, X3);
-        grid.put(loc3, villager3);
+        grid.put(loc3, villager);
 
-        Villager villager4 = new Villager();
-        villager4.setColor();
         Location loc4 = new Location(Y4, X4);
-        grid.put(loc4, villager4);
+        grid.put(loc4, villager);
 
-        Villager villager5 = new Villager();
-        villager5.setColor();
         Location loc5 = new Location(Y5, X5);
-        grid.put(loc5, villager5);
+        grid.put(loc5, villager);
 
         // display the newly constructed and populated world
         world.show();
     }
 
+        /**
+     * Creates the actors and inserts them into their initial starting positions in the grid for the lab
+     *
+     * @pre     the grid has been created
+     * @post    all actors that comprise the initial state of the game have been added to the grid
+     * 
+     */
+    public void populateGame()  
+    {
+        // constants for the location of the cells initially alive
+        final int X1 = 2, Y1 = 0;
+        final int X2 = 3, Y2 = 1;
+        final int X3 = 0, Y3 = 2;
+        final int X4 = 1, Y4 = 2;
+        final int X5 = 2, Y5 = 4;
+
+        // the grid of Actors that maintains the state of the game
+        //  (alive cells contains actors; dead cells do not)
+        Grid<Actor> grid = world.getGrid();
+
+        // create and add villagers (my live cells) to the intial locations
+        villager.setColor();
+
+        Location loc1 = new Location(Y1, X1);
+        grid.put(loc1, villager);
+
+        Location loc2 = new Location(Y2, X2);
+        grid.put(loc2, villager);
+
+        Location loc3 = new Location(Y3, X3);
+        grid.put(loc3, villager);
+
+        Location loc4 = new Location(Y4, X4);
+        grid.put(loc4, villager);
+
+        Location loc5 = new Location(Y5, X5);
+        grid.put(loc5, villager);
+
+        // display the newly constructed and populated world
+        world.show();
+    }
+    
     /**
+     * Generates the next generation based on the rules of the Game of Life and updates the grid
+     * associated with the world
+     *
+     * @pre     the game has been initialized
+     * @post    the world has been populated with a new grid containing the next generation
+     * 
+     */
+    public void createNextGenerationTestMethod()
+    {
+        /** You will need to read the documentation for the World, Grid, and Location classes
+         *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
+         */
+
+        // create the grid, of the specified size, that contains Actors
+        Grid<Actor> grid = world.getGrid();
+
+        //updates next generation
+        for(int i=0; i<this.world.getGrid().getNumRows(); i++)
+        {
+            for(int j=0; j<this.world.getGrid().getNumCols(); j++)
+            {
+                Location loc = new Location(i,j);
+                ArrayList list = grid.getOccupiedAdjacentLocations(loc);
+                int check = list.size();
+                if(check<2)
+                {
+                grid.remove(loc);
+            }
+            else if(check == 2)
+            {
+            }
+            else if(check ==3)
+            {
+             grid.put(loc, villager);   
+            }
+            else if (check>=4)
+            {
+             grid.remove(loc);   
+            }
+            }
+        }
+    }
+    
+  /**
      * Generates the next generation based on the rules of the Game of Life and updates the grid
      * associated with the world
      *
@@ -116,35 +196,10 @@ public class GameOfLife
         {
             for(int j=0; j<this.world.getGrid().getNumCols(); j++)
             {
-                Location loc1 = new Location(i - 1, j - 1);
-                Actor actor1 = world.getGrid().get(loc1);
 
-                Location loc2 = new Location(i, j - 1);
-                Actor actor2 = world.getGrid().get(loc2);
-
-                Location loc3 = new Location(i + 1, j - 1);
-                Actor actor3 = world.getGrid().get(loc3);
-
-                Location loc4 = new Location(i - 1, j);
-                Actor actor4 = world.getGrid().get(loc4);               
-
-                Location loc6 = new Location(i + 1, j);
-                Actor actor6 = world.getGrid().get(loc6);
-
-                Location loc7 = new Location(i - 1, j + 1);
-                Actor actor7 = world.getGrid().get(loc7);
-
-                Location loc8 = new Location(i, j + 1);
-                Actor actor8 = world.getGrid().get(loc8);
-
-                Location loc9 = new Location(i + 1, j + 1);
-                Actor actor9 = world.getGrid().get(loc9);
-                
-       
             }
         }
     }
-
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
@@ -188,7 +243,7 @@ public class GameOfLife
     {
         GameOfLife game = new GameOfLife(6, 6);  // hard-code 6x6 grid
         // populate the game
-        game.populateGame();
+        game.populateGameTestMethod();
 
         /*
          * !!! Create a loop to repeatedly invoke the createNextGeneration method.
