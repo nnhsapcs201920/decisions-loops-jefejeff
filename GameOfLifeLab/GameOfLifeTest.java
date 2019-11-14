@@ -117,6 +117,7 @@ public class GameOfLifeTest
         final int COLS = 6;
 
         GameOfLife game = new GameOfLife(ROWS, COLS);
+        
         game.populateGameTestMethod();
 
         game.createNextGenerationTestMethod();

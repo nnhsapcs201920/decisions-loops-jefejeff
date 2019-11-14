@@ -5,6 +5,8 @@ import info.gridworld.grid.Grid;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.awt.Window;
 
 /**
  * Game of Life starter code. Demonstrates how to create and populate the game using the GridWorld framework.
@@ -88,7 +90,7 @@ public class GameOfLife
         world.show();
     }
 
-        /**
+    /**
      * Creates the actors and inserts them into their initial starting positions in the grid for the lab
      *
      * @pre     the grid has been created
@@ -97,19 +99,46 @@ public class GameOfLife
      */
     public void populateGame()  
     {
+        //colors the cells
+        villager.setColor();
+        zombie.setColor();
+
         // constants for the location of the cells initially alive
-        final int X1 = 2, Y1 = 0;
-        final int X2 = 3, Y2 = 1;
-        final int X3 = 0, Y3 = 2;
-        final int X4 = 1, Y4 = 2;
-        final int X5 = 2, Y5 = 4;
+        final int X1 = 0, Y1 = 10;
+        final int X2 = 0, Y2 = 11;
+        final int X3 = 1, Y3 = 10;
+        final int X4 = 1, Y4 = 11;
+        final int X5 = 4, Y5 = 13;
+        final int X6 = 4, Y6 = 14;
+        final int X7 = 5, Y7 = 13;
+        final int X8 = 5, Y8 = 14;
+        final int X9 = 7, Y9 = 10;
+        final int X10 = 7, Y10 = 11;
+        final int X11 = 8, Y11 = 10;
+        final int X12 = 8, Y12 = 11;
+        final int X13 = 20, Y13 = 21;
+        final int X14 = 21, Y14 = 20;
+        final int X15 = 21, Y15 = 21;
+        final int X16 = 21, Y16 = 22;
+        final int X17 = 22, Y17 = 19;
+        final int X18 = 22, Y18 = 22;
+        final int X19 = 22, Y19 = 23;
+        final int X20 = 26, Y20 = 19;
+        final int X21 = 26, Y21 = 20;
+        final int X22 = 27, Y22 = 20;
+        final int X23 = 27, Y23 = 21;
+        final int X24 = 27, Y24 = 22;
+        final int X25 = 28, Y25 = 21;
+        final int X26 = 31, Y26 = 21;
+        final int X27 = 31, Y27 = 22;
+        final int X28 = 32, Y28 = 21;
+        final int X29 = 32, Y29 = 22;
 
         // the grid of Actors that maintains the state of the game
         //  (alive cells contains actors; dead cells do not)
         Grid<Actor> grid = world.getGrid();
 
         // create and add villagers (my live cells) to the intial locations
-        villager.setColor();
 
         Location loc1 = new Location(Y1, X1);
         grid.put(loc1, villager);
@@ -126,10 +155,95 @@ public class GameOfLife
         Location loc5 = new Location(Y5, X5);
         grid.put(loc5, villager);
 
+        Location loc6 = new Location(Y6, X6);
+        grid.put(loc6, villager);
+
+        Location loc7 = new Location(Y7, X7);
+        grid.put(loc7, villager);
+
+        Location loc8 = new Location(Y8, X8);
+        grid.put(loc8, villager);
+
+        Location loc9 = new Location(Y9, X9);
+        grid.put(loc9, villager);
+
+        Location loc10 = new Location(Y10, X10);
+        grid.put(loc10, villager);
+
+        Location loc11 = new Location(Y11, X11);
+        grid.put(loc11, villager);
+
+        Location loc12 = new Location(Y12, X12);
+        grid.put(loc12, villager);
+
+        Location loc13 = new Location(Y13, X13);
+        grid.put(loc13, villager);
+
+        Location loc14 = new Location(Y14, X14);
+        grid.put(loc14, villager);
+
+        Location loc15 = new Location(Y15, X15);
+        grid.put(loc15, villager);
+
+        Location loc16 = new Location(Y16, X16);
+        grid.put(loc16, villager);
+
+        Location loc17 = new Location(Y17, X17);
+        grid.put(loc17, villager);
+
+        Location loc18 = new Location(Y18, X18);
+        grid.put(loc18, villager);
+
+        Location loc19 = new Location(Y19, X19);
+        grid.put(loc19, villager);
+
+        Location loc20 = new Location(Y20, X20);
+        grid.put(loc20, villager);
+
+        Location loc21 = new Location(Y21, X21);
+        grid.put(loc21, villager);
+
+        Location loc22 = new Location(Y22, X22);
+        grid.put(loc22, villager);
+
+        Location loc23 = new Location(Y23, X23);
+        grid.put(loc23, villager);
+
+        Location loc24 = new Location(Y24, X24);
+        grid.put(loc24, villager);
+
+        Location loc25 = new Location(Y25, X25);
+        grid.put(loc25, villager);
+
+        Location loc26 = new Location(Y26, X26);
+        grid.put(loc26, villager);
+
+        Location loc27 = new Location(Y27, X27);
+        grid.put(loc27, villager);
+
+        Location loc28 = new Location(Y28, X28);
+        grid.put(loc28, villager);
+
+        Location loc29 = new Location(Y29, X29);
+        grid.put(loc29, villager);
+
+        //create and add zombies (my dead cells) to the inital locations
+        for(int i=0; i<this.world.getGrid().getNumRows(); i++)
+        {
+            for(int j=0; j<this.world.getGrid().getNumCols(); j++)
+            {
+                Location loc = new Location(i, j);
+                Actor check = grid.get(loc);
+                if(check != villager)
+                {
+                    grid.put(loc, zombie);   
+                }
+            }
+        }
         // display the newly constructed and populated world
         world.show();
     }
-    
+
     /**
      * Generates the next generation based on the rules of the Game of Life and updates the grid
      * associated with the world
@@ -147,6 +261,10 @@ public class GameOfLife
         // create the grid, of the specified size, that contains Actors
         Grid<Actor> grid = world.getGrid();
 
+        //creates new grid for next generation
+        BoundedGrid<Actor> newGrid = new BoundedGrid<Actor>(grid.getNumRows(), grid.getNumCols());
+        ActorWorld newWorld = new ActorWorld(newGrid);
+
         //updates next generation
         for(int i=0; i<this.world.getGrid().getNumRows(); i++)
         {
@@ -155,26 +273,25 @@ public class GameOfLife
                 Location loc = new Location(i,j);
                 ArrayList list = grid.getOccupiedAdjacentLocations(loc);
                 int check = list.size();
-                if(check<2)
+
+                if(check == 2&&grid.get(loc)==villager)
                 {
-                grid.remove(loc);
-            }
-            else if(check == 2)
-            {
-            }
-            else if(check ==3)
-            {
-             grid.put(loc, villager);   
-            }
-            else if (check>=4)
-            {
-             grid.remove(loc);   
-            }
+                    newGrid.put(loc, villager);
+                }
+                else if(check ==3)
+                {
+                    newGrid.put(loc, villager);   
+                }
+                else
+                {
+                }
             }
         }
+        world = newWorld;
+        world.show();
     }
-    
-  /**
+
+    /**
      * Generates the next generation based on the rules of the Game of Life and updates the grid
      * associated with the world
      *
@@ -187,19 +304,47 @@ public class GameOfLife
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
          */
-
         // create the grid, of the specified size, that contains Actors
         Grid<Actor> grid = world.getGrid();
+
+        //creates new grid for next generation
+        BoundedGrid<Actor> newGrid = new BoundedGrid<Actor>(grid.getNumRows(), grid.getNumCols());
+        ActorWorld newWorld = new ActorWorld(newGrid);
 
         //updates next generation
         for(int i=0; i<this.world.getGrid().getNumRows(); i++)
         {
             for(int j=0; j<this.world.getGrid().getNumCols(); j++)
             {
+                Location loc = new Location(i,j);
+                int liveCells = 0;
 
+                for (int z = 0; z <= grid.getNeighbors(loc).size() - 1; z++)
+                {
+                    if (grid.getNeighbors(loc).get(z) == villager)
+                    {
+                        liveCells++;
+                    }
+
+                }
+                if(liveCells == 2&&grid.get(loc)==villager)
+                {
+                    newGrid.put(loc, villager);
+                }
+                else if(liveCells ==3)
+                {
+                    newGrid.put(loc, villager);   
+                }
+                else
+                {
+                    newGrid.put(loc, zombie);
+                }
             }
         }
+        world = newWorld;
+        world.show();
     }
+
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
@@ -241,15 +386,51 @@ public class GameOfLife
      */
     public static void main(String[] args) throws InterruptedException
     {
-        GameOfLife game = new GameOfLife(6, 6);  // hard-code 6x6 grid
-        // populate the game
-        game.populateGameTestMethod();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Run test method or run actual lab?");
+        System.out.println("Enter 1 for test method.");
+        System.out.println("Enter 2 for actual lab.");
+        int which = s.nextInt();
+        if(which==1)
+        {
+            // hard-code 6x6 grid
+            GameOfLife game = new GameOfLife(6, 6);
 
-        /*
-         * !!! Create a loop to repeatedly invoke the createNextGeneration method.
-         *      You can have your program pause between each invocation:
-         *          Thread.sleep(1000); // sleep 1000 milliseconds (1 second)
-         */ 
+            // populate the game
+            game.populateGameTestMethod();
+            Thread.sleep(999);
+
+            /*
+             * !!! Create a loop to repeatedly invoke the createNextGeneration method.
+             *      You can have your program pause between each invocation:
+             *          Thread.sleep(1000); // sleep 1000 milliseconds (1 second)
+             */ 
+            game.createNextGeneration();
+            Thread.sleep(999);
+            game.createNextGeneration();
+            Thread.sleep(999);
+            System.out.print("This is the final grid after 3 generations");
+        }
+        else if(which==2)
+        {
+            // hard-code 6x6 grid
+            GameOfLife game = new GameOfLife(33, 33);
+
+            // populate the game
+            game.populateGame();
+            Thread.sleep(777);
+            /*
+             * !!! Create a loop to repeatedly invoke the createNextGeneration method.
+             *      You can have your program pause between each invocation:
+             *          Thread.sleep(1000); // sleep 1000 milliseconds (1 second)
+             */ 
+            do
+            {
+                game.createNextGeneration();
+                Thread.sleep(777);
+            }
+            while (true);
+        }
     }
 
 }
