@@ -36,6 +36,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.ToolTipManager;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  * Game of Life starter code. Demonstrates how to create and populate the game using the GridWorld framework.
  * Also demonstrates how to provide accessor methods to make the class testable by unit tests.
@@ -414,10 +418,13 @@ public class GameOfLife
      */
     public static void main(String[] args) throws InterruptedException
     {
+        System.out.print('\u000C');
         Scanner s = new Scanner(System.in);
         System.out.println("Run test method or run actual lab?");
+        System.out.println("");
         System.out.println("Enter 1 for test method.");
         System.out.println("Enter 2 for actual lab.");
+        System.out.println();
         int which = s.nextInt();
         if(which==1)
         {
@@ -433,9 +440,9 @@ public class GameOfLife
              *      You can have your program pause between each invocation:
              *          Thread.sleep(1000); // sleep 1000 milliseconds (1 second)
              */ 
-            game.createNextGeneration();
+            game.createNextGenerationTestMethod();
             Thread.sleep(999);
-            game.createNextGeneration();
+            game.createNextGenerationTestMethod();
             Thread.sleep(999);
             System.out.print("This is the final grid after 3 generations");
         }
@@ -454,6 +461,7 @@ public class GameOfLife
              */ 
             do
             {
+
                 game.createNextGeneration();
                 Thread.sleep(777);
             }
