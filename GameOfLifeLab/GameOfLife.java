@@ -40,6 +40,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import info.gridworld.grid.UnboundedGrid;
+
 /**
  * Game of Life starter code. Demonstrates how to create and populate the game using the GridWorld framework.
  * Also demonstrates how to provide accessor methods to make the class testable by unit tests.
@@ -294,7 +296,7 @@ public class GameOfLife
         Grid<Actor> grid = world.getGrid();
 
         //creates new grid for next generation
-        BoundedGrid<Actor> newGrid = new BoundedGrid<Actor>(grid.getNumRows(), grid.getNumCols());
+        UnboundedGrid<Actor> newGrid = new UnboundedGrid<Actor>();
         ActorWorld newWorld = new ActorWorld(newGrid);
 
         //updates next generation
@@ -340,13 +342,13 @@ public class GameOfLife
         Grid<Actor> grid = world.getGrid();
 
         //creates new grid for next generation
-        BoundedGrid<Actor> newGrid = new BoundedGrid<Actor>(grid.getNumRows(), grid.getNumCols());
+        UnboundedGrid<Actor> newGrid = new UnboundedGrid<Actor>();
         ActorWorld newWorld = new ActorWorld(newGrid);
 
         //updates next generation
-        for(int i=0; i<this.world.getGrid().getNumRows(); i++)
+        for(int i=0; i<33; i++)
         {
-            for(int j=0; j<this.world.getGrid().getNumCols(); j++)
+            for(int j=0; j<33; j++)
             {
                 Location loc = new Location(i,j);
                 int liveCells = 0;
@@ -453,7 +455,7 @@ public class GameOfLife
 
             // populate the game
             game.populateGame();
-            Thread.sleep(777);
+            Thread.sleep(1000);
             /*
              * !!! Create a loop to repeatedly invoke the createNextGeneration method.
              *      You can have your program pause between each invocation:
@@ -463,7 +465,7 @@ public class GameOfLife
             {
 
                 game.createNextGeneration();
-                Thread.sleep(777);
+                Thread.sleep(333);
             }
             while (true);
         }
