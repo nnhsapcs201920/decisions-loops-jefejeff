@@ -296,7 +296,7 @@ public class GameOfLife
         Grid<Actor> grid = world.getGrid();
 
         //creates new grid for next generation
-        UnboundedGrid<Actor> newGrid = new UnboundedGrid<Actor>();
+        BoundedGrid<Actor> newGrid = new BoundedGrid<Actor>(6, 6);
         ActorWorld newWorld = new ActorWorld(newGrid);
 
         //updates next generation
@@ -463,9 +463,8 @@ public class GameOfLife
              */ 
             do
             {
-
                 game.createNextGeneration();
-                Thread.sleep(333);
+                Thread.sleep(111);
             }
             while (true);
         }

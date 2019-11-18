@@ -6,7 +6,7 @@ Game of Life Lab
 * Dead cells will be zombies
 * The pattern will be the Simkin Glider Gun, more information can be found here: https://www.conwaylife.com/wiki/Simkin_glider_gun
 * The game runs forever
-* Each tick will be 0.25 seconds
+* Each tick will be 0.111 seconds
 * There are the no edge cases, when it hits the edge it will disappear instead of wrapping around
 
 # Introduction
